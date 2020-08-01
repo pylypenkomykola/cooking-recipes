@@ -1,0 +1,84 @@
+package ua.com.mykolapylypenko.cooking_recipes.domain.entity;
+
+import javax.persistence.*;
+import java.io.Serializable;
+
+@Entity
+@Table(name = "recipes", schema = "cooking_recipes")
+public class Recipe implements Serializable {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_recipe")
+    private Long recipeId;
+
+    @Column(name = "portions_amount")
+    private Integer portionAmount;
+
+    @Column(name = "name")
+    private String recipeName;
+
+    public Recipe(){
+
+    }
+
+    private Recipe(Builder builder){
+        this.portionAmount = builder.portionAmount;
+        this.recipeName = builder.recipeName;
+    }
+
+    @OneToMany(mappedBy = "recipe")
+    private Set<RecipeProcess> recipeProcess;
+
+    @OneToMany(mappedBy = "recipe")
+    private Set<RecipeTag> recipeTag;
+
+    @OneToMany(mappedBy = "recipe")
+    private Set<RecipeIngredient> recipeIngredient;
+
+    public Long getRecipeId() {
+        return recipeId;
+    }
+
+    public Integer getPortionAmount() {
+        return portionAmount;
+    }
+
+    public String getRecipeName() {
+        return recipeName;
+    }
+
+    public Set<RecipeProcess> getRecipeProcess() {
+        return recipeProcess;
+    }
+
+    public Set<RecipeTag> getRecipeTag() {
+        return recipeTag;
+    }
+
+    public Set<RecipeIngredient> getRecipeIngredient() {
+        return recipeIngredient;
+    }
+
+    public final class Builder{
+        private Integer portionAmount;
+        private String recipeName;
+
+        public Builder(){
+
+        }
+
+        public Builder portionAmount(Integer portionAmount){
+            this.portionAmount = portionAmount;
+            return this;
+        }
+
+        public Builder recipeName(String recipeName){
+            this.recipeName = recipeName;
+            return this;
+        }
+
+        public Recipe build(){
+            return new Recipe(this);
+        }
+    }
+}
