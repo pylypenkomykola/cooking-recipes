@@ -1,0 +1,50 @@
+package ua.com.mykolapylypenko.cooking_recipes.domain.entity;
+
+import javax.persistence.*;
+import java.io.Serializable;
+
+@Entity
+@Table(name = "recipe_tags", schema = "cooking_recipes")
+public class RecipeTag implements Serializable {
+
+    public RecipeTag() {
+    }
+
+    public RecipeTag(Builder builder) {
+        this.recipe = builder.recipe;
+        this.cookingProcess = builder.cookingProcess;
+    }
+
+    @ManyToOne
+    @MapsId("id_recipe")
+    @JoinColumn(name = "id_recipe", referencedColumnName = "id_recipe")
+    private Recipe recipe;
+
+    @ManyToOne
+    @MapsId("id_tag")
+    @JoinColumn(name = "id_tag", referencedColumnName = "id_tag")
+    private CookingProcess cookingProcess;
+
+    private static final class Builder{
+        private Recipe recipe;
+        private CookingProcess cookingProcess;
+
+        public Builder() {
+        }
+
+        public Builder recipe(Recipe recipe){
+            this.recipe = recipe;
+            return this;
+        }
+
+        public Builder cookingProcess(CookingProcess cookingProcess){
+            this.cookingProcess = cookingProcess;
+            return this;
+        }
+
+        public RecipeTag build(){
+            return new RecipeTag(this);
+        }
+    }
+
+}
