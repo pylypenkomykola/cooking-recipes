@@ -1,5 +1,7 @@
 package ua.com.mykolapylypenko.cooking_recipes.domain.entity;
 
+import ua.com.mykolapylypenko.cooking_recipes.domain.entity.key.RecipeCookingIngredientKey;
+
 import javax.persistence.*;
 import java.io.Serializable;
 
@@ -7,12 +9,16 @@ import java.io.Serializable;
 @Table(name = "recipe_ingredients", schema = "cooking_recipes")
 public class RecipeIngredient implements Serializable {
 
+    @EmbeddedId
+    private RecipeCookingIngredientKey key;
+
     public RecipeIngredient() {
     }
 
     public RecipeIngredient(Builder builder) {
-        this.recipe = recipe;
-        this.cookingIngredient = cookingIngredient;
+        this.key = builder.key;
+        this.recipe = builder.recipe;
+        this.cookingIngredient = builder.cookingIngredient;
     }
 
     @ManyToOne
@@ -34,10 +40,16 @@ public class RecipeIngredient implements Serializable {
     }
 
     public static final class Builder{
+        private RecipeCookingIngredientKey key;
         private Recipe recipe;
         private CookingIngredient cookingIngredient;
 
         public Builder() {
+        }
+
+        public Builder key(RecipeCookingIngredientKey key){
+            this.key = key;
+            return this;
         }
 
         public Builder recipe(Recipe recipe){
