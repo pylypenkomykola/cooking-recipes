@@ -1,5 +1,7 @@
 package ua.com.mykolapylypenko.cooking_recipes.domain.entity;
 
+import ua.com.mykolapylypenko.cooking_recipes.domain.entity.key.UserRecipeKey;
+
 import javax.persistence.*;
 import java.io.Serializable;
 
@@ -7,10 +9,14 @@ import java.io.Serializable;
 @Table(name = "saved_recipes", schema = "cooking_recipes")
 public class SavedRecipe implements Serializable {
 
+    @EmbeddedId
+    private UserRecipeKey userRecipeKey;
+
     public SavedRecipe() {
     }
 
     public SavedRecipe(Builder builder) {
+        this.userRecipeKey = builder.userRecipeKey;
         this.user = builder.user;
         this.recipe = builder.recipe;
     }
@@ -25,6 +31,10 @@ public class SavedRecipe implements Serializable {
     @JoinColumn(name = "id_recipe", referencedColumnName = "id_recipe")
     private Recipe recipe;
 
+    public UserRecipeKey getUserRecipeKey() {
+        return userRecipeKey;
+    }
+
     public User getUser() {
         return user;
     }
@@ -34,10 +44,16 @@ public class SavedRecipe implements Serializable {
     }
 
     public static final class Builder{
+        private UserRecipeKey userRecipeKey;
         private User user;
         private Recipe recipe;
 
         public Builder() {
+        }
+
+        public Builder userRecipeKey(UserRecipeKey userRecipeKey){
+            this.userRecipeKey = userRecipeKey;
+            return this;
         }
 
         public Builder user(User user){
