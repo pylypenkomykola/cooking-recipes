@@ -1,5 +1,7 @@
 package ua.com.mykolapylypenko.cooking_recipes.domain.entity;
 
+import ua.com.mykolapylypenko.cooking_recipes.domain.entity.key.RecipeTagKey;
+
 import javax.persistence.*;
 import java.io.Serializable;
 
@@ -7,10 +9,14 @@ import java.io.Serializable;
 @Table(name = "recipe_tags", schema = "cooking_recipes")
 public class RecipeTag implements Serializable {
 
+    @EmbeddedId
+    private RecipeTagKey key;
+
     public RecipeTag() {
     }
 
-    public RecipeTag(Builder builder) {
+    private RecipeTag(Builder builder) {
+        this.key = builder.key;
         this.recipe = builder.recipe;
         this.cookingProcess = builder.cookingProcess;
     }
@@ -25,11 +31,29 @@ public class RecipeTag implements Serializable {
     @JoinColumn(name = "id_tag", referencedColumnName = "id_tag")
     private CookingProcess cookingProcess;
 
+    public RecipeTagKey getKey() {
+        return key;
+    }
+
+    public Recipe getRecipe() {
+        return recipe;
+    }
+
+    public CookingProcess getCookingProcess() {
+        return cookingProcess;
+    }
+
     private static final class Builder{
+        private RecipeTagKey key;
         private Recipe recipe;
         private CookingProcess cookingProcess;
 
         public Builder() {
+        }
+
+        public Builder key(RecipeTagKey key){
+            this.key = key;
+            return this;
         }
 
         public Builder recipe(Recipe recipe){
