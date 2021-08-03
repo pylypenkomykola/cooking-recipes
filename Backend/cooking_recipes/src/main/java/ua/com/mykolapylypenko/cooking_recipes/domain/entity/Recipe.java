@@ -2,6 +2,7 @@ package ua.com.mykolapylypenko.cooking_recipes.domain.entity;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Set;
 
 @Entity
 @Table(name = "recipes", schema = "cooking_recipes")
@@ -35,6 +36,12 @@ public class Recipe implements Serializable {
     @OneToMany(mappedBy = "recipe")
     private Set<RecipeIngredient> recipeIngredient;
 
+    @OneToMany(mappedBy = "recipe")
+    private Set<SavedRecipe> savedRecipes;
+
+    @OneToMany(mappedBy = "recipe")
+    private Set<PostedRecipe> postedRecipes;
+
     public Long getRecipeId() {
         return recipeId;
     }
@@ -59,7 +66,15 @@ public class Recipe implements Serializable {
         return recipeIngredient;
     }
 
-    public final class Builder{
+    public Set<SavedRecipe> getSavedRecipes() {
+        return savedRecipes;
+    }
+
+    public Set<PostedRecipe> getPostedRecipes() {
+        return postedRecipes;
+    }
+
+    public static final class Builder{
         private Integer portionAmount;
         private String recipeName;
 
