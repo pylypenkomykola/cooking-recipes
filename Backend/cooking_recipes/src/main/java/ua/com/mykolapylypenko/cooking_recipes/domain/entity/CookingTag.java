@@ -18,9 +18,10 @@ public class CookingTag implements Serializable {
     public CookingTag() {
     }
 
-    public CookingTag(Long tagId, String tagName) {
-        this.tagId = tagId;
-        this.tagName = tagName;
+    private CookingTag(Builder builder) {
+        this.tagId = builder.tagId;
+        this.tagName = builder.tagName;
+        this.recipeTags = builder.recipeTags;
     }
 
     @OneToMany(mappedBy = "tag")
