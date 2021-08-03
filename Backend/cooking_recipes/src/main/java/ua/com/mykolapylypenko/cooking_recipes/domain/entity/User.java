@@ -61,7 +61,7 @@ public class User implements Serializable {
         return postedRecipes;
     }
 
-    public final class Builder{
+    public static final class Builder{
         private String username;
         private String password;
         private String fullName;

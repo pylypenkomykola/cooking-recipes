@@ -40,7 +40,7 @@ public class RecipeProcess implements Serializable {
         return recipe;
     }
 
-    public final class Builder{
+    public static final class Builder{
         private Integer position;
         private CookingProcess cookingProcess;
         private Recipe recipe;
