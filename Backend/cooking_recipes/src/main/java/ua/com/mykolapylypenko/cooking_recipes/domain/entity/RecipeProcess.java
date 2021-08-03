@@ -1,11 +1,16 @@
 package ua.com.mykolapylypenko.cooking_recipes.domain.entity;
 
+import ua.com.mykolapylypenko.cooking_recipes.domain.entity.key.RecipeCookingProcessKey;
+
 import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
 @Table(name = "recipe_processes", schema = "cooking_recipes")
 public class RecipeProcess implements Serializable {
+    @EmbeddedId
+    private RecipeCookingProcessKey key;
+
     @Column(name = "position")
     private Integer position;
 
@@ -23,9 +28,14 @@ public class RecipeProcess implements Serializable {
     }
 
     public RecipeProcess(Builder builder) {
+        this.key = builder.key;
         this.position = builder.position;
         this.cookingProcess = builder.cookingProcess;
         this.recipe = builder.recipe;
+    }
+
+    public RecipeCookingProcessKey getKey() {
+        return key;
     }
 
     public Integer getPosition() {
@@ -41,9 +51,15 @@ public class RecipeProcess implements Serializable {
     }
 
     public static final class Builder{
+        private RecipeCookingProcessKey key;
         private Integer position;
         private CookingProcess cookingProcess;
         private Recipe recipe;
+
+        public Builder key(RecipeCookingProcessKey key){
+            this.key = key;
+            return this;
+        }
 
         public Builder position(Integer position){
             this.position = position;
