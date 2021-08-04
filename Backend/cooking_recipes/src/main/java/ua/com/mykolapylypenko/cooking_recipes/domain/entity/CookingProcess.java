@@ -22,9 +22,9 @@ public class CookingProcess implements Serializable {
     }
 
     public CookingProcess(Builder builder) {
-        this.cookingProcessId = cookingProcessId;
-        this.description = description;
-        this.timeSpend = timeSpend;
+        this.cookingProcessId = builder.cookingProcessId;
+        this.description = builder.description;
+        this.timeSpend = builder.timeSpend;
     }
 
     @OneToMany(mappedBy = "cookingProcess")
