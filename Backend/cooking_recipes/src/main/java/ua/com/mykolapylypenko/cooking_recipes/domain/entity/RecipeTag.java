@@ -18,7 +18,7 @@ public class RecipeTag implements Serializable {
     private RecipeTag(Builder builder) {
         this.key = builder.key;
         this.recipe = builder.recipe;
-        this.cookingTag = builder.cookingTag;
+        this.tag = builder.cookingTag;
     }
 
     @ManyToOne
@@ -29,7 +29,7 @@ public class RecipeTag implements Serializable {
     @ManyToOne
     @MapsId("id_tag")
     @JoinColumn(name = "id_tag", referencedColumnName = "id_tag")
-    private CookingTag cookingTag;
+    private CookingTag tag;
 
     public RecipeTagKey getKey() {
         return key;
@@ -39,8 +39,8 @@ public class RecipeTag implements Serializable {
         return recipe;
     }
 
-    public CookingTag getCookingTag() {
-        return cookingTag;
+    public CookingTag getTag() {
+        return tag;
     }
 
     private static final class Builder{
