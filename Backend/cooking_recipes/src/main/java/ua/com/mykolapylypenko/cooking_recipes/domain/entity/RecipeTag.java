@@ -39,7 +39,7 @@ public class RecipeTag implements Serializable {
         return recipe;
     }
 
-    public CookingProcess getCookingTag() {
+    public CookingTag getCookingTag() {
         return cookingTag;
     }
 
