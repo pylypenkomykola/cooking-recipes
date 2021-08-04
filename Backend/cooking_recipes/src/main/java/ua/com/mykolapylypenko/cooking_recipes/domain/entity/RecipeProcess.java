@@ -1,12 +1,13 @@
 package ua.com.mykolapylypenko.cooking_recipes.domain.entity;
 
 import ua.com.mykolapylypenko.cooking_recipes.domain.entity.key.RecipeCookingProcessKey;
+import ua.com.mykolapylypenko.cooking_recipes.public_info.PublicVariables;
 
 import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
-@Table(name = "recipe_processes", schema = "cooking_recipes")
+@Table(name = "recipe_processes", schema = PublicVariables.DATABASE_SCHEMA_NAME)
 public class RecipeProcess implements Serializable {
     @EmbeddedId
     private RecipeCookingProcessKey key;

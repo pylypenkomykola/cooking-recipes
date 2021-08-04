@@ -1,12 +1,13 @@
 package ua.com.mykolapylypenko.cooking_recipes.domain.entity;
 
 import ua.com.mykolapylypenko.cooking_recipes.domain.entity.key.UserRecipeKey;
+import ua.com.mykolapylypenko.cooking_recipes.public_info.PublicVariables;
 
 import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
-@Table(name = "posted_recipes", schema = "cooking_recipes")
+@Table(name = "posted_recipes", schema = PublicVariables.DATABASE_SCHEMA_NAME)
 public class PostedRecipe implements Serializable {
 
     @EmbeddedId

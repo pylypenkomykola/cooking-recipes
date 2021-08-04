@@ -1,11 +1,13 @@
 package ua.com.mykolapylypenko.cooking_recipes.domain.entity;
 
+import ua.com.mykolapylypenko.cooking_recipes.public_info.PublicVariables;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Set;
 
 @Entity
-@Table(name = "recipes", schema = "cooking_recipes")
+@Table(name = "recipes", schema = PublicVariables.DATABASE_SCHEMA_NAME)
 public class Recipe implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

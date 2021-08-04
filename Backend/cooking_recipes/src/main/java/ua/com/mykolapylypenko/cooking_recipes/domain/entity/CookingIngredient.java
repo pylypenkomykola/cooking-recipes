@@ -4,8 +4,10 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Set;
 
+import ua.com.mykolapylypenko.cooking_recipes.public_info.*;
+
 @Entity
-@Table(name = "cooking_ingredients", schema = "cooking_recipes")
+@Table(name = "cooking_ingredients", schema = PublicVariables.DATABASE_SCHEMA_NAME)
 public class CookingIngredient implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
